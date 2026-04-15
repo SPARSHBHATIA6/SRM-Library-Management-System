@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up — SRM Library Management System</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="page-auth">
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit">
+        <span class="brand-icon">📚</span>
+        <span class="brand-name">SRM Library Management System</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join SRM Library Management System and start reading today</p>
+      </div>
+
+      <form id="signupForm" onsubmit="handleSignup(event)">
+
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="Jane Doe" required/>
+          <span class="field-error" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="signupEmail">Email Address</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" required/>
+          <span class="field-error" id="signupEmailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="signupPassword" placeholder="Min. 6 characters" required/>
+            <button type="button" class="toggle-pwd" onclick="togglePassword('signupPassword')">👁</button>
+          </div>
+          <!-- Password strength bar -->
+          <div class="pwd-strength-bar">
+            <div class="pwd-strength-fill" id="pwdStrengthFill"></div>
+          </div>
+          <span class="pwd-strength-label" id="pwdStrengthLabel"></span>
+          <span class="field-error" id="signupPasswordError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="password-wrap">
+            <input type="password" id="confirmPassword" placeholder="Re-enter password" required/>
+            <button type="button" class="toggle-pwd" onclick="togglePassword('confirmPassword')">👁</button>
+          </div>
+          <span class="field-error" id="confirmError"></span>
+        </div>
+
+        <div id="signupStatus" class="status-msg" style="display:none"></div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="signupBtn">
+          Create Account
+        </button>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

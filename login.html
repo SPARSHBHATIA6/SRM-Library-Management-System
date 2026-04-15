@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — LibraNet</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="page-auth">
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:inherit">
+        <span class="brand-icon">📚</span>
+        <span class="brand-name">LibraNet</span>
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your LibraNet account</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+
+        <!-- Role selector -->
+        <div class="role-toggle">
+          <button type="button" class="role-btn active" id="userRoleBtn"
+                  onclick="selectRole('user')">👤 User</button>
+          <button type="button" class="role-btn" id="adminRoleBtn"
+                  onclick="selectRole('admin')">🛡️ Admin</button>
+        </div>
+        <input type="hidden" id="loginRole" value="user"/>
+
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" required/>
+          <span class="field-error" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="loginPassword" placeholder="Enter your password" required/>
+            <button type="button" class="toggle-pwd" onclick="togglePassword('loginPassword')">👁</button>
+          </div>
+          <span class="field-error" id="passwordError"></span>
+        </div>
+
+        <!-- Status message (success / error) -->
+        <div id="loginStatus" class="status-msg" style="display:none"></div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+          Sign In
+        </button>
+      </form>
+
+      <p class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
+
+      <!-- Demo credentials hint -->
+      <div class="demo-hint">
+        <strong>Demo credentials:</strong><br/>
+        User — user@demo.com / pass123<br/>
+        Admin — admin@demo.com / admin123
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

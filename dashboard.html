@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — SRM Library Management System</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="page-dashboard">
+
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">📚</span>
+      <span class="brand-name">SRM Library Management System</span>
+    </div>
+    <div class="nav-user">
+      <span id="navUserName">Hello, Reader!</span>
+      <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li class="active" onclick="showTab('browse')">🔍 Browse Books</li>
+        <li onclick="showTab('borrowed')">📋 My Books</li>
+        <li onclick="showTab('history')">🕒 History</li>
+        <li onclick="showTab('profile')">👤 Profile</li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main class="dash-main">
+
+      <!-- ── Browse Books Tab ── -->
+      <section id="tab-browse" class="dash-tab active">
+        <div class="dash-header">
+          <h2>Browse Catalog</h2>
+          <input type="text" id="searchInput" placeholder="Search by title or author…"
+                 oninput="searchBooks()" class="search-input"/>
+        </div>
+        <div class="books-grid" id="catalogGrid"></div>
+      </section>
+
+      <!-- ── My Borrowed Books Tab ── -->
+      <section id="tab-borrowed" class="dash-tab">
+        <div class="dash-header"><h2>My Borrowed Books</h2></div>
+        <div id="borrowedList" class="borrowed-list"></div>
+      </section>
+
+      <!-- ── History Tab ── -->
+      <section id="tab-history" class="dash-tab">
+        <div class="dash-header"><h2>Borrowing History</h2></div>
+        <div id="historyList" class="borrowed-list"></div>
+      </section>
+
+      <!-- ── Profile Tab ── -->
+      <section id="tab-profile" class="dash-tab">
+        <div class="dash-header"><h2>My Profile</h2></div>
+        <div class="profile-card" id="profileCard"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Borrow confirmation toast -->
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

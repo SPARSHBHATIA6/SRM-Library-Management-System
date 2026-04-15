@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — SRM Library Management System</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="page-admin">
+
+  <nav class="navbar admin-nav">
+    <div class="nav-brand">
+      <span class="brand-icon">📚</span>
+      <span class="brand-name">SRM Library Management System <span class="admin-badge">Admin</span></span>
+    </div>
+    <div class="nav-user">
+      <span id="adminNavName">Admin</span>
+      <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar admin-sidebar">
+      <ul class="sidebar-menu">
+        <li class="active" onclick="showAdminTab('stats')">📊 Dashboard</li>
+        <li onclick="showAdminTab('books')">📚 Manage Books</li>
+        <li onclick="showAdminTab('users')">👥 Users</li>
+        <li onclick="showAdminTab('add-book')">➕ Add Book</li>
+      </ul>
+    </aside>
+
+    <main class="dash-main">
+
+      <!-- ── Stats Tab ── -->
+      <section id="admin-tab-stats" class="dash-tab active">
+        <div class="dash-header"><h2>Library Dashboard</h2></div>
+        <div class="stats-grid" id="statsGrid"></div>
+        <h3 style="margin-top:2rem">Recent Activity</h3>
+        <div id="activityLog" class="activity-log"></div>
+      </section>
+
+      <!-- ── Manage Books Tab ── -->
+      <section id="admin-tab-books" class="dash-tab">
+        <div class="dash-header">
+          <h2>Manage Books</h2>
+          <input type="text" id="adminSearchInput" placeholder="Search books…"
+                 oninput="adminSearchBooks()" class="search-input"/>
+        </div>
+        <table class="admin-table" id="booksTable">
+          <thead>
+            <tr>
+              <th>ID</th><th>Title</th><th>Author</th><th>Genre</th>
+              <th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="booksTableBody"></tbody>
+        </table>
+      </section>
+
+      <!-- ── Users Tab ── -->
+      <section id="admin-tab-users" class="dash-tab">
+        <div class="dash-header"><h2>Registered Users</h2></div>
+        <table class="admin-table">
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Email</th><th>Books Borrowed</th><th>Status</th></tr>
+          </thead>
+          <tbody id="usersTableBody"></tbody>
+        </table>
+      </section>
+
+      <!-- ── Add Book Tab ── -->
+      <section id="admin-tab-add-book" class="dash-tab">
+        <div class="dash-header"><h2>Add New Book</h2></div>
+        <div class="form-card">
+          <form id="addBookForm" onsubmit="handleAddBook(event)">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Book Title *</label>
+                <input type="text" id="bookTitle" placeholder="e.g. The Alchemist" required/>
+                <span class="field-error" id="bookTitleError"></span>
+              </div>
+              <div class="form-group">
+                <label>Author *</label>
+                <input type="text" id="bookAuthor" placeholder="e.g. Paulo Coelho" required/>
+                <span class="field-error" id="bookAuthorError"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Genre</label>
+                <select id="bookGenre">
+                  <option>Fiction</option>
+                  <option>Non-Fiction</option>
+                  <option>Science</option>
+                  <option>History</option>
+                  <option>Fantasy</option>
+                  <option>Mystery</option>
+                  <option>Biography</option>
+                  <option>Technology</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Total Copies *</label>
+                <input type="number" id="bookCopies" value="1" min="1" max="50" required/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="bookDesc" rows="3" placeholder="Brief summary…"></textarea>
+            </div>
+
+            <div id="addBookStatus" class="status-msg" style="display:none"></div>
+
+            <button type="submit" class="btn btn-primary">Add Book to Library</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Confirm delete modal -->
+  <div id="deleteModal" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <h3>Remove Book?</h3>
+      <p id="deleteModalText">This will permanently remove the book from the catalog.</p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" onclick="closeDeleteModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmDelete()">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
